@@ -25,7 +25,11 @@ public class JPATest {
 		giorgia.setCognome("Cosi");
 		giorgia.setNome("Giorgia");
 		
-		entityManager.persist(giorgia);
+		if ((giorgia = entityManager.find(Anagrafica.class, giorgia.getCodiceFiscale())) != null) {
+			entityManager.persist(giorgia);
+		}else {
+			giorgia.setNome("Giorgina");
+		}
 		
 		anagraficaList = entityManager.createQuery("SELECT a FROM anagrafica a").getResultList();
 		
@@ -33,17 +37,18 @@ public class JPATest {
 			System.out.println(anagrafica.getNome());
 		}
 		
-		
-		giorgia = entityManager.find(Anagrafica.class, "CSOGRG16D64A669U");
-		giorgia.setNome("Giorgina");
-		
 		anagraficaList = entityManager.createQuery("SELECT a FROM anagrafica a").getResultList();
 		
 		for (Anagrafica anagrafica : anagraficaList) {
 			System.out.println(anagrafica.getNome());
+			
+			if (anagrafica.getNome().equals("Marianna")) {
+				anagrafica.setNome("Mariangela");
+				entityManager.getTransaction().commit();
+			}
 		}
 		
-		entityManager.getTransaction().rollback();
+//		entityManager.getTransaction().rollback();
 		
 		anagraficaList = entityManager.createQuery("SELECT a FROM anagrafica a").getResultList();
 		
