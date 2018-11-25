@@ -20,6 +20,21 @@ public class JPATest {
 			System.out.println(anagrafica.getCodiceFiscale());
 		}
 		
+		Anagrafica giorgia = new Anagrafica();
+		giorgia.setCodiceFiscale("CSOGRG16D64A669U");
+		giorgia.setCognome("Cosi");
+		giorgia.setNome("Giorgia");
+		
+		entityManager.persist(giorgia);
+		
+		entityManager.getTransaction().rollback();
+		
+		anagraficaList = entityManager.createQuery("SELECT a FROM anagrafica a").getResultList();
+		
+		for (Anagrafica anagrafica : anagraficaList) {
+			System.out.println(anagrafica.getCodiceFiscale());
+		}
+		
 		entityManager.getTransaction().commit();
 		entityManager.close();
 		jpaEntityManagerFactory.factoryShutDown();
