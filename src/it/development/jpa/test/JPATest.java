@@ -1,11 +1,11 @@
-package jpa.test;
+package it.development.jpa.test;
 
 import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import jpa.entities.Anagrafica;
-import jpa.factories.JPAEntityManagerFactory;
+import it.development.jpa.entities.Anagrafica;
+import it.development.jpa.factories.JPAEntityManagerFactory;
 
 public class JPATest {
 

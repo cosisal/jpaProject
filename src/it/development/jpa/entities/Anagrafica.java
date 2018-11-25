@@ -1,11 +1,13 @@
-package jpa.entities;
+package it.development.jpa.entities;
+
+import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity(name="anagrafica")
-public class Anagrafica {
+public class Anagrafica implements Serializable {
 	@Id
 	@Column(name="codice_fiscale")
 	String codiceFiscale;
